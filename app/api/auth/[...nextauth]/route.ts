@@ -4,7 +4,7 @@ import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 const authOptions: NextAuthOptions = {
-    providers: [
+  providers: [
         CredentialsProvider({
             name: 'Credentials',
             credentials: {
@@ -30,14 +30,10 @@ const authOptions: NextAuthOptions = {
                 return user
               }//criando usuarios para teste, normalmente pega do banco
 
-
-
-
-
         })
-    ],
+  ],
 
-    callbacks: {
+  callbacks: {
         jwt: async ({ token, user }) => {
           const customUser = user as unknown as any
     
@@ -61,8 +57,14 @@ const authOptions: NextAuthOptions = {
               }
             }
         }
-    }
+  },
 
+  pages: {
+    signIn: '/auth/login',
+    signOut: '/auth/signout',
+    error: '/auth/error',
+    verifyRequest: '/auth/verify-request'
+  },
 }
 const handler = NextAuth(authOptions)
 
